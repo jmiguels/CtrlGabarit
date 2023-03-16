@@ -5,7 +5,7 @@ JMSantos 2023
 
 #include "Arduino.h"
 
-char VersaoStr[] = "V0.01 15/03/2023";
+char VersaoStr[] = "V0.02 16/03/2023";
 
 //############# PINs definitions #############
 
@@ -17,6 +17,7 @@ char VersaoStr[] = "V0.01 15/03/2023";
 #define Buzzer      4  
 #define Relay1     14  
 #define Relay2     27  
+#define Relay3     25  
 #define Solenoid1  19  
 #define Solenoid2  18  
 #define Solenoid3   5  
@@ -81,11 +82,12 @@ void setup()
 void loop()
 {
   CLInerface(); // Client Line Interface processing over the serial port
+  Relay(3, true);
+  Relay(2, true);
   Relay(1, true);
-  Solenoid(1, true);
   delay(1000);
   Relay(1, false);
-  Solenoid(1, false);
+  Relay(2, false);
+  Relay(3, false);
   delay(1000);
-
 }

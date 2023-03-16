@@ -11,6 +11,12 @@ void Relay(int Id, bool DestinationState)
       digitalWrite(Relay2,HIGH);
     else  
       digitalWrite(Relay2,LOW);
+
+  if(Id==3)
+    if(DestinationState==true) 
+      digitalWrite(Relay3,HIGH);
+    else  
+      digitalWrite(Relay3,LOW);
 }
 
 
