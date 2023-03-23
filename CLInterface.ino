@@ -35,6 +35,7 @@ void CLInerface()
     if (Commandstr.equals("")) DoNothing(); else
     if (Commandstr.equals("?")||Commandstr.equals("help")||Commandstr.equals("Help")) Help(); else
     if (Commandstr.equals("reset")) SystemReset(); else
+    if (Commandstr.substring(0,3).equals("set")) set(Commandstr); else    
       Serial.println("Command Error\n");
 
   Serial.print(">");
@@ -64,7 +65,49 @@ void Help()
 {
   String HelpString=""; 
   Serial.println("This is HELP");
-  HelpString+="Help          - Use ?, help or Help to get help\n\r";
-  HelpString+="Reset         - Reset the unit\n\r";
+  HelpString+="Help            - Use ?, help or Help to get help\n\r";
+  HelpString+="Reset           - Reset the unit\n\r";
+  HelpString+="version         - Returns type of device and version\n\r";  
+  HelpString+="type            - Returns type of device\n\r";    
+  HelpString+="set \"servoN\"  - set the servoN angle (between 0 and 180 degrees).\n\r";
+  HelpString+="                  N is a number between 1 and 7\n\r";
+  HelpString+="                  Example to set the servo2 angle to 20 degrees: set \"servo2\" \"20\"\n\r";
   Serial.println(HelpString);
+}
+
+/**************************************
+ **************************************/
+void GetVersion()
+{
+  Serial.println(VersionStr);
+}
+
+/**************************************
+ **************************************/
+void GetType()
+{
+  Serial.println(DeviceTypeStr);
+}
+
+void set(String InputString)
+{
+  String Parameter;
+  String Value;
+  
+  Parameter=InputString.substring(5,InputString.indexOf("\"",6));
+  Value=InputString.substring(5+Parameter.length()+3,InputString.indexOf("\"",5+Parameter.length()+3));
+
+  if (Parameter.equals("servo1")) servo_1.write(Value.toInt()); else 
+  if (Parameter.equals("servo2")) servo_2.write(Value.toInt()); else 
+  if (Parameter.equals("servo3")) servo_3.write(Value.toInt()); else 
+  if (Parameter.equals("servo4")) servo_4.write(Value.toInt()); else 
+  if (Parameter.equals("servo5")) servo_5.write(Value.toInt()); else 
+  if (Parameter.equals("servo6")) servo_6.write(Value.toInt()); else 
+  if (Parameter.equals("servo7") && Servo7Active) servo_7.write(Value.toInt()); else 
+    
+  {  
+    Serial.println("Set Command Error\n");
+    return;
+  }  
+  Serial.println("OK");
 }

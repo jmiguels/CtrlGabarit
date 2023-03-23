@@ -12,7 +12,7 @@ void Relay(int Id, bool DestinationState)
     else  
       digitalWrite(Relay2,LOW);
 
-  if(Id==3)
+  if(Id==3 && (!Servo7Active))
     if(DestinationState==true) 
       digitalWrite(Relay3,HIGH);
     else  
