@@ -89,8 +89,8 @@ void setup()
   pinMode(Solenoid5, OUTPUT);
   pinMode(Solenoid6, OUTPUT);
   pinMode(D32IN, INPUT_PULLUP);
-  pinMode(D34IN, INPUT_PULLUP);
-  pinMode(D35IN, INPUT_PULLUP);
+  pinMode(D34IN, INPUT);
+  pinMode(D35IN, INPUT);
 
   if(digitalRead(D32IN)==LOW) 
   {
